@@ -15,12 +15,21 @@
 </p>
 
 <p align="center">
+  <strong>Languages:</strong>
+  English ·
+  <a href="README.pt-BR.md">Português (Brasil)</a> ·
+  <a href="README.es.md">Español</a>
+</p>
+
+<p align="center">
   <a href="LICENSE"><img alt="License: MPL-2.0" src="https://img.shields.io/badge/license-MPL--2.0-blue.svg"></a>
   <img alt="Shell: Bash" src="https://img.shields.io/badge/shell-bash-4EAA25.svg">
   <img alt="AWS CLI" src="https://img.shields.io/badge/AWS%20CLI-v2-232F3E.svg">
   <img alt="Release" src="https://img.shields.io/badge/release-v1.0.0-6f42c1.svg">
   <img alt="Mode" src="https://img.shields.io/badge/mode-read--only-success.svg">
 </p>
+
+> The English README is the canonical documentation. The Portuguese and Spanish versions are maintained as equivalent community translations.
 
 ---
 
