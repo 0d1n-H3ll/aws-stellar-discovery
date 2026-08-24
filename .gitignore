@@ -1,0 +1,11 @@
+# Discovery output
+stellar-discovery-*/
+stellar-discovery-*.zip
+stellar-discovery-*.tar.gz
+
+# Local/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
