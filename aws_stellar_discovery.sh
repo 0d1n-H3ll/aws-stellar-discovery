@@ -29,7 +29,8 @@ fingerprint() {
     | sha256sum | awk '{print $1}'
 }
 
-readonly TOOL_FINGERPRINT="$(fingerprint)"
+TOOL_FINGERPRINT="$(fingerprint)"
+readonly TOOL_FINGERPRINT
 
 export AWS_PAGER=""
 export AWS_CLI_AUTO_PROMPT=off
@@ -103,10 +104,10 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ "$DAYS" =~ ^[0-9]+$ ]] && (( DAYS >= 1 && DAYS <= 62 )) || {
+if [[ ! "$DAYS" =~ ^[0-9]+$ ]] || (( DAYS < 1 || DAYS > 62 )); then
   echo "ERROR: --days must be an integer between 1 and 62" >&2
   exit 2
-}
+fi
 
 need() {
   command -v "$1" >/dev/null 2>&1 || {
@@ -158,11 +159,13 @@ capture() {
     return 0
   fi
   local rc=$?
-  printf '[%s] RC=%s CMD=' "$(date -u +%FT%TZ)" "$rc" >> "$ERRORS"
-  printf '%q ' "$@" >> "$ERRORS"
-  printf '\n' >> "$ERRORS"
-  cat "$err" >> "$ERRORS"
-  printf '\n------------------------------------------------------------\n' >> "$ERRORS"
+  {
+    printf '[%s] RC=%s CMD=' "$(date -u +%FT%TZ)" "$rc"
+    printf '%q ' "$@"
+    printf '\n'
+    cat "$err"
+    printf '\n------------------------------------------------------------\n'
+  } >> "$ERRORS"
   jq -Rs --argjson rc "$rc" '{error: ., return_code: $rc}' < "$err" > "$file"
   rm -f "$tmp" "$err"
   return "$rc"
